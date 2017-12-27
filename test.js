@@ -1,34 +1,3 @@
-// var page = require('webpage').create();
-// var loginUrl = 'https://www.wanikani.com/login';
-// var username = 'xuomo';
-// var password = 'dickball1';
-
-// var steps = [];
-
-// page.open(loginUrl, function(status) {
-//   page.includeJs(
-//     'http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js',
-//     function() {
-//       var $usernameInput;
-//       var $passwordInput;
-//       var $loginButton;
-//       page.evaluate(function() {
-//         $usernameInput = $('#user_login');
-//         $passwordInput = $('#user_password');
-//         $loginButton = $('button[type="submit"]');
-
-//         $usernameInput.val('xuomo');
-//         $passwordInput.val('dickball1');
-
-//         $loginButton.click();
-
-//         page.render('logged_in.png');
-//       });
-//       phantom.exit();
-//     }
-//   );
-// });
-
 var steps = [];
 var testindex = 0;
 var doNext = true;
