@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/e-e/wanki#readme",
   "dependencies": {
-    "casperjs": "^1.1.4"
+    "casperjs": "^1.1.4",
+    "cheerio": "^1.0.0-rc.2",
+    "spooky": "^0.2.5"
   }
 }
