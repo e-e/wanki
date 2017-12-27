@@ -1,7 +1,7 @@
 var fs = require('fs');
 
 var casper = require('casper').create();
-var config = require('./config/index.js');
+var config = require('../config/index.js');
 var links = [];
 var index = 0;
 var mp3Urls = [];
@@ -34,14 +34,12 @@ casper.thenOpen(
 );
 
 casper.then(function() {
-  casper.capture('screenshots/lvl1_10.png');
+  var fpath = fs.pathJoin(config.dataDir, 'screenshots', 'lvl1_10.png');
+  casper.capture(fpath);
   links = this.evaluate(getLinks);
 });
 
 casper.run(function() {
-  fs.write(
-    fs.pathJoin(fs.workingDirectory, 'pages.json'),
-    JSON.stringify(links),
-    'w'
-  );
+  var fpath = fs.pathJoin(config.dataDir, 'pages.json');
+  fs.write(fpath, JSON.stringify(links), 'w');
 });

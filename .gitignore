@@ -1,5 +1,6 @@
 node_modules
 *.json
 config/index.js
-html/*
-screenshots/*
+data/*.json
+data/html/*
+data/screenshots/*

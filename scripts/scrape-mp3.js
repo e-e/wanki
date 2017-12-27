@@ -1,8 +1,8 @@
 var fs = require('fs');
-
 var casper = require('casper').create();
-var links = JSON.parse(fs.read(fs.pathJoin(fs.workingDirectory, 'pages.json')));
-var config = require('./config/index.js');
+var config = require('../config/index.js');
+var linksFpath = fs.pathJoin(config.dataDir, 'pages.json');
+var links = JSON.parse(fs.read(linksFpath));
 var index = 0;
 var mp3Urls = [];
 
@@ -18,9 +18,7 @@ function getMp3Url() {
       return src;
     }
   }
-
   return audio.src;
-  // return document.querySelector('source[type="audio/mpeg"]').src;
 }
 
 function login() {
@@ -46,33 +44,13 @@ casper.each(links, function(self, link) {
   var mp3 = '';
   this.thenOpen(link, function() {
     var html = this.evaluate(getPageHtml);
-    fs.write(
-      fs.pathJoin(
-        fs.workingDirectory,
-        'html',
-        link.replace(/[^a-z0-9]/gi, '_') + '.html'
-      ),
-      html,
-      'w'
+    var fpath = fs.pathJoin(
+      config.dataDir,
+      'html',
+      link.replace(/[^a-z0-9]/gi, '_') + '.html'
     );
-    /* this.echo('opened ' + link);
-    // casper.capture('screenshots/' + link.replace(/[^a-z0-9]/gi, '_') + '.png');
-    mp3 = this.evaluate(getMp3Url);
-    this.echo('found: ' + mp3);
-    mp3Urls.push(mp3); */
+    fs.write(fpath, html, 'w');
   });
-  // this.then(function() {});
 });
 
-casper.run(function() {
-  // console.log('links: ', links.length, links[0]);
-  // fs.write(
-  //   fs.pathJoin(fs.workingDirectory, 'pages.json'),
-  //   JSON.stringify(links),
-  //   'utf8',
-  //   function(err) {
-  //     if (err) console.log(err);
-  //   }
-  // );
-  // this.echo('mp3 url: ' + mp3Urls[0]);
-});
+casper.run(function() {});

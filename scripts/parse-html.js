@@ -1,10 +1,11 @@
 const fs = require('fs');
 const path = require('path');
 const cheerio = require('cheerio');
+const config = require('../config');
 
 function getHtmlFiles() {
   return new Promise((resolve, reject) => {
-    fs.readdir(path.join(__dirname, './html'), 'utf8', (err, files) => {
+    fs.readdir(path.join(config.dataDir, './html'), 'utf8', (err, files) => {
       if (err) {
         console.log(err);
         return;
@@ -17,7 +18,7 @@ function getHtmlFiles() {
 function readHtmlFile(fpath) {
   return new Promise((resolve, reject) => {
     fs.readFile(
-      path.join(__dirname, './html', fpath),
+      path.join(config.dataDir, './html', fpath),
       'utf8',
       (err, contents) => {
         if (err) {
@@ -69,7 +70,7 @@ async function main() {
   let files = await getHtmlFiles();
   let urls = await Promise.all(files.map(parseHtml));
   fs.writeFile(
-    path.join(__dirname, './mp3-urls.json'),
+    path.join(config.dataDir, './mp3-urls.json'),
     JSON.stringify(urls),
     'utf8',
     err => {
