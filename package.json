@@ -19,6 +19,7 @@
   "dependencies": {
     "casperjs": "^1.1.4",
     "cheerio": "^1.0.0-rc.2",
+    "request": "^2.83.0",
     "spooky": "^0.2.5"
   }
 }

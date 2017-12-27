@@ -1,4 +1,10 @@
 <?php
+/*
+  resources:
+    http://www.tanos.co.uk/jlpt/
+*/
+
+
 // get txt files from: https://wanikanitoanki.com/export
 
 $submitted = $_POST['submitted'] ?? false;

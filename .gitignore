@@ -4,3 +4,4 @@ config/index.js
 data/*.json
 data/html/*
 data/screenshots/*
+data/audio/*.mp3
