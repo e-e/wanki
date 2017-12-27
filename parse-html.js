@@ -32,9 +32,37 @@ function readHtmlFile(fpath) {
 
 async function parseHtml(fpath) {
   let html = await readHtmlFile(fpath);
-  // console.log(html.length);
   let $ = cheerio.load(html);
-  return $('source[type="audio/mpeg"]').attr('src');
+
+  let data = {
+    level: parseInt(
+      $('a.level-icon')
+        .text()
+        .trim(),
+      10
+    ),
+    mp3: $('source[type="audio/mpeg"]').attr('src'),
+    character: $('.japanese-font-styling-correction')
+      .text()
+      .trim(),
+    meaning: $('header h1')
+      .text()
+      .trim(),
+    alt_meaning: $('.alternative-meaning p')
+      .text()
+      .trim(),
+    kana: $('.vocabulary-reading p')
+      .text()
+      .trim()
+  };
+
+  data.meaning = data.meaning.replace(
+    data.level.toString() + ' ' + data.character + ' ',
+    ''
+  );
+
+  // console.log(html.length);
+  return data;
 }
 
 async function main() {
